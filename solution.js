@@ -7,8 +7,8 @@
                 return direction ? a-b : b-a
             });
 
-            // elevator.destinationQueue = floors;
-            // elevator.checkDestinationQueue();
+            elevator.destinationQueue = floors;
+            elevator.checkDestinationQueue();
         };
 
         let elevatorDispatcher = {
@@ -59,10 +59,12 @@
             floor.on("up_button_pressed", function () {
                 let elevator = elevatorDispatcher.selectElevator(floor.floorNum());
                 elevator.goToFloor(floor.floorNum());
+                normalizeQueue(elevator, true)
             });
             floor.on("down_button_pressed", function () {
                 let elevator = elevatorDispatcher.selectElevator(floor.floorNum());
                 elevator.goToFloor(floor.floorNum());
+                normalizeQueue(elevator, false)
             })
         })
     },
